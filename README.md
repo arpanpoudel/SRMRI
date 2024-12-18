@@ -10,7 +10,7 @@ The dataset and codebase will be updated periodically to reflect improvements an
 
 1. **Download the Dataset**:  
    The dataset can be downloaded from [Google Drive](INSERT_LINK_HERE).  
-   The archive is organized into training and testing sets, with separate folders for high-resolution (HR) and low-resolution (LR) (after registration; You can aslo download the LR image slices without registration placed on different zip file) images. Each image is stored as a `.npy` file, named in the format `subject_name_slice.npy`, ensuring traceability to the original subject and slice information.
+   The archive is organized into training and testing sets, with separate folders for high-resolution (HR) and low-resolution (LR) (after registration; You can also download the LR image slices without registration placed on different zip file) images. Each image is stored as a `.npy` file, named in the format `subject_name_slice.npy`, ensuring traceability to the original subject and slice information.
 
    The folder structure after extraction should look like this:
 
@@ -42,3 +42,9 @@ root/ ├── data/ │ ├── Registration_slices/ │ │ ├── test/
 Example extraction command:
 ```bash
 unzip Registration_slices.zip -d /path/to/repository/data
+
+3. **Download Pretrained Weights**:
+    Download the pretrained model weights required for the super-resolution pipeline. There are two sets of weights:
+    - **Kernel Learning Model**: Download and place the weights in the Kernel_learning/checkpoints folder.
+    - **Score-Based MRI Model**: Download and place the weights in the score-MRI/checkpoints folder.
+
