@@ -53,7 +53,7 @@ Download the weights for the **Kernel Learning Model** and place them in the `Ke
 ##### 2. Score-Based MRI Model Weights
 Download the weights for the **Score-Based MRI Model** and place them in the `score-MRI/checkpoints` folder.
 - **Download Link**: [Score-Based MRI Weights](INSERT_SCORE_WEIGHTS_LINK_HERE)
-- **Folder Structure**:
+- **Folder Structure**: root/ ├── score-MRI/ │ ├── checkpoints/ │ │ ├── score_weights.pth
 
 
 
