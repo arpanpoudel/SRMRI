@@ -42,6 +42,7 @@ root/ ├── data/ │ ├── Registration_slices/ │ │ ├── test/
 Example extraction command:
 ```bash
 unzip Registration_slices.zip -d /path/to/repository/data
+```
 
 3. **Download Pretrained Weights**:
     Download the pretrained model weights required for the super-resolution pipeline. There are two sets of weights:
