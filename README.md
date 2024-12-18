@@ -35,7 +35,9 @@ data/
 
 2. **Extract the Data**:  
    After downloading the dataset, extract the archive to the `data` folder in the root directory of this repository.
+```
 root/ ├── data/ │ ├── Registration_slices/ │ │ ├── test/ │ │ └── train/ │ ...
+```
 
 Example extraction command:
 ```bash
