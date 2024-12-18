@@ -14,7 +14,7 @@ The dataset and codebase will be updated periodically to reflect improvements an
 
    The folder structure after extraction should look like this:
 
-` ``` `data/
+```data/
 ├── train/
 │   ├── HR/
 │   │   ├── subject1_slice_001.npy
@@ -28,7 +28,7 @@ The dataset and codebase will be updated periodically to reflect improvements an
 │   ├── HR/
 │   ├── LR/
 └── ...
-` ``` `
+```
 - **HR Folder**: Contains the high-resolution MRI slices for each subject.  
 - **LR Folder**: Contains the corresponding low-resolution MRI slices for each subject.
 
