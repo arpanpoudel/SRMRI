@@ -7,10 +7,34 @@
 The dataset and codebase will be updated periodically to reflect improvements and additions.
 
 ### Download and Setup
+
 1. **Download the Dataset**:  
    The dataset can be downloaded from [Google Drive](INSERT_LINK_HERE).  
-   The archive contains LR and HR MRI images organized by subject and resolution type.
+   The archive is organized into training and testing sets, with separate folders for high-resolution (HR) and low-resolution (LR) images. Each image is stored as a `.npy` file, named in the format `subject_name_slice.npy`, ensuring traceability to the original subject and slice information.
+
+   The folder structure after extraction should look like this:
+
+data/
+├── train/
+│   ├── HR/
+│   │   ├── subject1_slice_001.npy
+│   │   ├── subject1_slice_002.npy
+│   │   └── ...
+│   ├── LR/
+│   │   ├── subject1_slice_001.npy
+│   │   ├── subject1_slice_002.npy
+│   │   └── ...
+├── test/
+│   ├── HR/
+│   ├── LR/
+└── ...
+- **HR Folder**: Contains the high-resolution MRI slices for each subject.  
+- **LR Folder**: Contains the corresponding low-resolution MRI slices for each subject.
 
 2. **Extract the Data**:  
-   After downloading, extract the dataset to the `data` folder in the root directory of this repository. Ensure the folder structure looks as follows:
+   After downloading the dataset, extract the archive to the `data` folder in the root directory of this repository.
 root/ ├── data/ │ ├── Registration_slices/ │ │ ├── test/ │ │ └── train/ │ ...
+
+Example extraction command:
+```bash
+unzip Registration_slices.zip -d /path/to/repository/data
