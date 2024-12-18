@@ -14,7 +14,8 @@ The dataset and codebase will be updated periodically to reflect improvements an
 
    The folder structure after extraction should look like this:
 
-```data/
+```
+data/
 ├── train/
 │   ├── HR/
 │   │   ├── subject1_slice_001.npy
