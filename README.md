@@ -46,6 +46,6 @@ unzip Registration_slices.zip -d /path/to/repository/data
 
 3. **Download Pretrained Weights**:
     Download the pretrained model weights required for the super-resolution pipeline. There are two sets of weights:
-    - **Kernel Learning Model**: Download and place the weights in the Kernel_learning/checkpoints folder.
-    - **Score-Based MRI Model**: Download and place the weights in the score-MRI/checkpoints folder.
+- **Kernel Learning Model**: Download and place the weights in the Kernel_learning/checkpoints folder.
+- **Score-Based MRI Model**: Download and place the weights in the score-MRI/checkpoints folder.
 
