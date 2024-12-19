@@ -76,5 +76,7 @@ cd score-MRI
 python inference_mri.py --root /path/to/low-resolution/images
 ```
 
+- Changing the skip steps (K from the paper): You can change skip steps in config files at score-MRI dir (sampling.fast_step=2 by default)
+
 
 
