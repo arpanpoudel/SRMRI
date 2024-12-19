@@ -63,5 +63,8 @@ unzip Registration_slices.zip -d /path/to/repository/data
     conda env create -f environment.yml
     conda activate sup
     ```
+    - CUDA Version: 12.2
+    - PyTorch version: 2.1.2
+    - TensorFlow Version: 2.15.0
 
 
