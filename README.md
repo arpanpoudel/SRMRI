@@ -55,5 +55,11 @@ Download the weights for the **Score-Based MRI Model** and place them in the `sc
 - **Download Link**: [Score-Based MRI Weights](https://drive.google.com/file/d/1Dn53VGDqWejEQD3adMcZA_BymrBhdxV9/view?usp=sharing)
 - **Folder Structure**: root/ ├── score-MRI/ │ ├── checkpoints/ │ │ ├── score_weight.pth
 
+4. **Environments**:
+    Use the environment.yml file in this repository to set up the environment:
+    ```
+    conda env create -f environment.yml
+    conda activate srmri
+    ```
 
 
