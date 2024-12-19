@@ -1,13 +1,9 @@
 import matplotlib.pyplot as plt
-import matplotlib
 import torch
 from models.ema import ExponentialMovingAverage
-
 from pathlib import Path
 import controllable_generation_fast as controllable_generation
-#import controllable_generation
 from utils import restore_checkpoint, clear_color, clear
-
 import models
 from models import utils as mutils
 from models import ncsnpp
@@ -15,29 +11,36 @@ import sampling
 from sde_lib import VESDE
 from sampling import (ReverseDiffusionPredictor,
                       LangevinCorrector)
-
 import datasets
 from datasets import ResizeAndPad
 from skimage.transform import resize
 from torchvision import transforms
-
-
 from utils import normalize_np
 from utils import get_logger
 from models.condition_methods import get_condition_method
-from models.measurements import get_operator,get_noise
+from models.measurements import get_operator, get_noise
 import importlib
 import numpy as np
 import os
 import sys
+import argparse
 
 def main():
-    
-    root = '/home/cidar/Desktop/MRI_superres_registration/data/Registration_slices/test/LR'
+    # Parse command-line arguments
+    parser = argparse.ArgumentParser(description="MRI Super-Resolution Script")
+    parser.add_argument(
+        "--root",
+        type=str,
+        default="/home/cidar/Desktop/MRI_superres_registration/data/Registration_slices/test/LR",
+        help="Path to the root directory containing input LR images. Default is set to /home/cidar/Desktop/MRI_superres_registration/data/Registration_slices/test/LR"
+    )
+    args = parser.parse_args()
+
+    root = args.root
     num_scales = 2000
     sde = 'VESDE'
-    
-    print('initaializing...')
+
+    print('Initializing...')
     if sde.lower() == 'vesde':
         configs = importlib.import_module(f"configs.ve.fastmri_knee_720_ncsnpp_continuous")
         config = configs.get_config()
@@ -45,41 +48,40 @@ def main():
         ckpt_filename = '/home/cidar/Desktop/MRI_superres_registration/score-MRI/work_dir/checkpoints/checkpoint_990.pth'
         sde = VESDE(sigma_min=config.model.sigma_min, sigma_max=config.model.sigma_max, N=config.model.num_scales)
         sampling_eps = 1e-5
-    
+
     batch_size = 1
     config.training.batch_size = batch_size
     config.eval.batch_size = batch_size
-    
-    # logger
-    device=config.device
+
+    # Logger
+    device = config.device
     logger = get_logger()
     logger.info(f"Device set to {device}.")
-    
-    #Prepare Operator and noise
+
+    # Prepare Operator and Noise
     measure_config = config.measurement
-    operator=get_operator(device=device, **measure_config.operator)
+    operator = get_operator(device=device, **measure_config.operator)
     noiser = get_noise(**measure_config.noise)
     logger.info(f"Operation: {measure_config.operator.name} / Noise: {measure_config.noise.name}")
-    
-    # Prepare conditioning method
+
+    # Prepare Conditioning Method
     cond_config = config.conditioning
     cond_method = get_condition_method(cond_config.method, operator, noiser, **cond_config.params)
     measurement_cond_fn = cond_method.conditioning
     logger.info(f"Conditioning method : {cond_config.method}")
-    
-    wavelet_method=get_condition_method('wavelet',operator,noiser,level=2,device=device)
+
+    wavelet_method = get_condition_method('wavelet', operator, noiser, level=2, device=device)
     wavelet_cond_fn = wavelet_method.conditioning
     random_seed = 0
-    
-    #score model
-    
+
+    # Score Model
     sigmas = mutils.get_sigmas(config)
     scaler = datasets.get_data_scaler(config)
     inverse_scaler = datasets.get_data_inverse_scaler(config)
     score_model = mutils.create_model(config)
 
     ema = ExponentialMovingAverage(score_model.parameters(),
-                                decay=config.model.ema_rate)
+                                   decay=config.model.ema_rate)
     state = dict(step=0, model=score_model, ema=ema)
 
     state = restore_checkpoint(ckpt_filename, state, config.device, skip_optimizer=True)
@@ -90,74 +92,51 @@ def main():
     snr = 0.16
     n_steps = 1
     probability_flow = False
-    
-    #
-    # subject index
-    #sub_idx=1
-    #file_idx=1
-    #sub_folders=[f for f in os.scandir(root) if f.is_dir()]
-    #files=[f.name for f in os.scandir(sub_folders[sub_idx])] 
-    files=[f.name for f in os.scandir(root)][::-1]
+
+    # Process Files
+    files = [f.name for f in os.scandir(root)][::-1]
 
     for filename in files:
-
-        #filename = Path(root)/sub_folders[sub_idx].name / files[file_idx]
-        
-    
-        # Specify save directory for saving generated samples
         save_root = Path(f'./results_registration_srmri/{filename}')
         save_root.mkdir(parents=True, exist_ok=True)
 
-        irl_types = ['input', 'recon','recon_progress']
+        irl_types = ['input', 'recon', 'recon_progress']
         for t in irl_types:
             save_root_f = save_root / t
             save_root_f.mkdir(parents=True, exist_ok=True)
 
-        # Read data
+        # Read Data
         img = torch.from_numpy(np.load(f'{root}/{filename}')).unsqueeze(0)
-        #img = torch.from_numpy(normalize_np(np.load(f'{root}/{filename}'))).unsqueeze(0)
-        transform=transforms.Compose([])
-        img=transform(img).squeeze()
+        transform = transforms.Compose([])
+        img = transform(img).squeeze()
         h, w = img.shape
         img = img.view(1, 1, h, w)
         img = img.to(config.device)
-        
+
         plt.imsave(save_root / 'input' / f'{filename.split(".")[0]}_LR.png', clear(img), cmap='gray')
 
-        ###############################################
-        #Inference
-        ###############################################
-        
-        pc_mri=controllable_generation.get_pc_mri(sde,
-                                                predictor, corrector,
-                                                inverse_scaler,
-                                                snr=snr,
-                                                n_steps=n_steps,
-                                                probability_flow=probability_flow,
-                                                continuous=config.training.continuous,
-                                                denoise=True,
-                                                save_progress=False,
-                                                save_root=save_root,measurement_cond_fn=measurement_cond_fn,fast_step=config.sampling.fast_step,fast_cond_fn=wavelet_cond_fn,measurement_noise=False)
+        # Inference
+        pc_mri = controllable_generation.get_pc_mri(sde,
+                                                    predictor, corrector,
+                                                    inverse_scaler,
+                                                    snr=snr,
+                                                    n_steps=n_steps,
+                                                    probability_flow=probability_flow,
+                                                    continuous=config.training.continuous,
+                                                    denoise=True,
+                                                    save_progress=False,
+                                                    save_root=save_root,
+                                                    measurement_cond_fn=measurement_cond_fn,
+                                                    fast_step=config.sampling.fast_step,
+                                                    fast_cond_fn=wavelet_cond_fn,
+                                                    measurement_noise=False)
 
-        x = pc_mri(score_model,scaler(img),config.data.out_shape)
-        
-        # random_sampler=sampling.get_pc_sampler(sde=sde,shape=label.shape,
-        #                                          predictor=predictor,corrector= corrector,
-        #                                          inverse_scaler=inverse_scaler,
-        #                                          snr=snr,
-        #                                          n_steps=n_steps,
-        #                                          probability_flow=probability_flow,
-        #                                          continuous=config.training.continuous,
-        #                                          denoise=True)
-        # x,_=random_sampler(score_model)
-        # Recon
+        x = pc_mri(score_model, scaler(img), config.data.out_shape)
+
+        # Save Results
         np.save(save_root / 'recon' / f'{filename.split(".")[0]}.npy', clear(x))
         plt.imsave(str(save_root / 'recon' / f'{filename.split(".")[0]}x.png'), clear(x), cmap='gray')
         plt.imsave(str(save_root / 'recon' / f'{filename.split(".")[0]}x_clip.png'), np.clip(clear(x), 0.05, 0.95), cmap='gray')
-        
-    
-    
-
 
 if __name__ == '__main__':
     main()
