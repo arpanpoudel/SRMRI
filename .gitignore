@@ -4,3 +4,5 @@ score-MRI/results_registration_srmri/
 score-MRI/results_registration_test/
 score-MRI/work_dir/
 Kernel_Learning/work_dir/
+Kernel_Learning/checkpoints/
+score-MRI/checkpoints/
