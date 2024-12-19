@@ -71,11 +71,10 @@ unzip Registration_slices.zip -d /path/to/repository/data
 To test the model, navigate to the score-MRI directory and run the `inference_mri.py` script. You can provide arguments to specify the directory of low-resolution images. The default directory is `data/Registration_slices/test/LR`. (You should change the absolute path to your pc)
 
 Example Usage: 
-
-    ```
-    cd score-MRI
-    python inference_mri.py --root /path/to/low-resolution/images
-    ```
+```
+cd score-MRI
+python inference_mri.py --root /path/to/low-resolution/images
+```
 
 
 
