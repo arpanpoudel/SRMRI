@@ -49,11 +49,11 @@ unzip Registration_slices.zip -d /path/to/repository/data
 ##### 1. Kernel Learning Model Weights
 Download the weights for the **Kernel Learning Model** and place them in the `Kernel_learning/checkpoints` folder.
 - **Download Link**: [Kernel Learning Weights](https://drive.google.com/file/d/1ee5xrPaTHvxR97QXKnwWAQdWQR7Yy3bO/view?usp=drive_link)
-- **Folder Structure**: root/ ├── Kernel_learning/ │ ├── checkpoints/ │ │ ├── kernel_weights.pth
+- **Folder Structure**: root/ ├── Kernel_learning/ │ ├── checkpoints/ │ │ ├── kernel_weight.pth
 ##### 2. Score-Based MRI Model Weights
 Download the weights for the **Score-Based MRI Model** and place them in the `score-MRI/checkpoints` folder.
 - **Download Link**: [Score-Based MRI Weights](https://drive.google.com/file/d/1Dn53VGDqWejEQD3adMcZA_BymrBhdxV9/view?usp=sharing)
-- **Folder Structure**: root/ ├── score-MRI/ │ ├── checkpoints/ │ │ ├── score_weights.pth
+- **Folder Structure**: root/ ├── score-MRI/ │ ├── checkpoints/ │ │ ├── score_weight.pth
 
 
 
