@@ -45,7 +45,7 @@ def main():
         configs = importlib.import_module(f"configs.ve.fastmri_knee_720_ncsnpp_continuous")
         config = configs.get_config()
         config.model.num_scales = num_scales
-        ckpt_filename = '/home/cidar/Desktop/MRI_superres_registration/score-MRI/work_dir/checkpoints/checkpoint_990.pth'
+        ckpt_filename = '/home/cidar/Desktop/MRI_superres_registration/score-MRI/checkpoints/score_weight.pth'
         sde = VESDE(sigma_min=config.model.sigma_min, sigma_max=config.model.sigma_max, N=config.model.num_scales)
         sampling_eps = 1e-5
 

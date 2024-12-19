@@ -69,7 +69,7 @@ def get_default_configs():
   
   #measurement.operator.scale_factor=2
   #measurement.operator.in_shape=[1,1,720,512]
-  measurement.operator.ckt_filename='/home/cidar/Desktop/MRI_superres_registration/Kernel_Learning/workdir/checkpoints-meta/checkpoint.pth'
+  measurement.operator.ckt_filename='/home/cidar/Desktop/MRI_superres_registration/Kernel_Learning/checkpoints/kernel_weight.pth'
   measurement.noise = noise = ml_collections.ConfigDict()
   measurement.noise.name='gaussian'
   measurement.noise.sigma=-0.05
