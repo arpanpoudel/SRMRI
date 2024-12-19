@@ -78,5 +78,5 @@ python inference_mri.py --root /path/to/low-resolution/images
 
 - Changing the skip steps (K from the paper): You can change skip steps in config files at score-MRI dir (sampling.fast_step=2 by default)
 
-
+- Code adapted from [Score-based-diffusion-model](https://github.com/yang-song/score_sde_pytorch) and [MCG](https://github.com/HJ-harry/MCG_diffusion) 
 
