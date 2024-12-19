@@ -67,12 +67,10 @@ unzip Registration_slices.zip -d /path/to/repository/data
     - PyTorch version: 2.1.2
     - TensorFlow Version: 2.15.0
 
-### Test the Model:
+### Test the Model
+To test the model, navigate to the score-MRI directory and run the `inference_mri.py` script. You can provide arguments to specify the directory of low-resolution images. The default directory is `data/Registration_slices/test/LR`. (You should change the absolute path to your pc)
 
-    To test the model, navigate to the score-MRI directory and run the `inference_mri.py` script. You can provide arguments to specify the directory of low-resolution images. The default directory is `data/Registration_slices/test/LR`. (You should change the absolute path to your pc)
-
-    Example Usage:
-    
+Example Usage: 
     ```
     cd score-MRI
     python inference_mri.py --root /path/to/low-resolution/images
