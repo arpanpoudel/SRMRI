@@ -9,7 +9,7 @@ The dataset and codebase will be updated periodically to reflect improvements an
 ### Download and Setup
 
 1. **Download the Dataset**:  
-   The dataset can be downloaded from [Google Drive](https://drive.google.com/file/d/17XEkO3gwgIjxiH4gn3EBBwMmh8pKnoYi/view?usp=sharing).  
+   The dataset can be downloaded from.  
    The archive is organized into training and testing sets, with separate folders for high-resolution (HR) and low-resolution (LR) (after registration; You can also download the LR image slices without registration placed on different zip file) images. Each image is stored as a `.npy` file, named in the format `subject_name_slice.npy`, ensuring traceability to the original subject and slice information.
 
    The folder structure after extraction should look like this:
