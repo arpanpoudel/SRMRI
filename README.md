@@ -23,6 +23,48 @@ import nibabel as nib
 img = nib.load("data/raw_nii/HR_volume.nii.gz")
 data_hr = img.get_fdata()      # e.g. shape (720,512,304)
 ```
+##### Hugging Face Dataset
+We’ve published SRMRI on the Hugging Face Hub for seamless loading and versioning. More info can be found [here](https://huggingface.co/datasets/arpanpoudel/SRMRI)
+
+```python
+from datasets import load_dataset
+import torch
+
+# Load the SRMRI dataset
+ds = load_dataset("arpanpoudel/SRMRI")
+
+# Inspect available splits
+print(ds)
+# DatasetDict({
+#   train_unsupervised: Dataset({...}),
+#   train_supervised:   Dataset({...}),
+#   evaluate:           Dataset({...})
+# })
+
+# Get one supervised example
+sample = ds["train_supervised"][0]
+print(sample["filename"])         # e.g. "AD_F11_90_slice_1"
+print(sample["lr"].shape, 
+      sample["hr"].shape)         # (360, 256), (720, 512)
+
+# Create a PyTorch DataLoader
+def collate_fn(batch):
+    lr = torch.stack([torch.from_numpy(x["lr"]) for x in batch]).unsqueeze(1)
+    hr = torch.stack([torch.from_numpy(x["hr"]) for x in batch]).unsqueeze(1)
+    return {"lr": lr, "hr": hr}
+
+loader = torch.utils.data.DataLoader(
+    ds["train_supervised"], 
+    batch_size=8, 
+    collate_fn=collate_fn
+)
+
+for batch in loader:
+    print(batch["lr"].shape, batch["hr"].shape)
+    # -> torch.Size([8, 1, 360, 256]), torch.Size([8, 1, 720, 512])
+    break
+```
+
 
 
 3. **Download Pretrained Weights**:
