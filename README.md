@@ -1,7 +1,7 @@
 ## SRMRI: An Open Dataset and Benchmarks for Blind Super-Resolution of 2D MRI
 
 ### Overview
-**SRMRI** is a curated dataset designed for the training and evaluation of machine learning models for blind super-resolution of 2D MRI images. The dataset includes both low-resolution (LR) (after registration / raw) and high-resolution (HR) images, obtained directly from MRI scanners, and provides a benchmark for the development and comparison of super-resolution algorithms.
+**SRMRI** is a curated dataset designed for the training and evaluation of machine learning models for blind super-resolution of 2D MRI images. The dataset includes both low-resolution (LR) and high-resolution (HR) images, obtained directly from MRI scanners, and provides a benchmark for the development and comparison of super-resolution algorithms.
 
 ### Getting Started
 The dataset and codebase will be updated periodically to reflect improvements and additions.
@@ -9,6 +9,7 @@ The dataset and codebase will be updated periodically to reflect improvements an
 ### Download and Setup
 
 1. **Download the Dataset**: 
+
 A. Raw NIfTI Volumes
 Full 3D scans (NIfTI .nii / .nii.gz) can be downloaded : [Here](https://drive.google.com/file/d/1RV93REgCbIMOxtHNDrXZtrGhhY9NT9-o/view?usp=drive_link)
    The dataset can be downloaded from.  
