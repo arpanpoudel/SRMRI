@@ -8,9 +8,9 @@ The dataset and codebase will be updated periodically to reflect improvements an
 
 ### Download and Setup
 
-1. **Download the Dataset**: 
+#### **Download the Dataset**: 
 
-#### Raw NIfTI Volumes
+##### Raw NIfTI Volumes
 Full 3D scans (NIfTI .nii / .nii.gz) can be downloaded : [Here](https://drive.google.com/file/d/1RV93REgCbIMOxtHNDrXZtrGhhY9NT9-o/view?usp=drive_link)
 
 ```bash
