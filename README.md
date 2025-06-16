@@ -87,7 +87,7 @@ Pre-processed dataset can also be downloaded from [here]()
     - TensorFlow Version: 2.19.0
 
 ### Test the Model
-To test the model, navigate to the score-MRI directory and run the `inference_srmri.py` script. You can provide arguments to specify the directory of low-resolution images. The default directory is `samples`.
+To test the model, navigate to the SRMRI directory and run the `inference_srmri.py` script. You can provide arguments to specify the directory of low-resolution images. The default directory is `samples`.
 The reconstruction will saved to results folder
 
 Example Usage: 
