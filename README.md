@@ -70,7 +70,7 @@ for batch in loader:
 3. **Download Pretrained Weights**:
     Download the pretrained model weights required for the super-resolution pipeline. 
     
-    a. ** Score function**
+    a. **Score function**
     Download the weights for the **Score Model** trained on HR images.
     - **Download Link**: [Score Weight](https://drive.google.com/file/d/1VCgbp_Dbvt4P2SAkzKKETQ9S1ZiEoPWm/view?usp=sharing)
     - Update the path for weight in config file : root/ ├── SRMRI/ │ ├── configs│ ├── defaults_lsun_configs.py under ```config.ckpt_filename```
@@ -84,15 +84,16 @@ for batch in loader:
     - TensorFlow Version: 2.19.0
 
 ### Test the Model
-To test the model, navigate to the score-MRI directory and run the `inference_mri.py` script. You can provide arguments to specify the directory of low-resolution images. The default directory is `data/Registration_slices/test/LR`. (You should change the absolute path to your pc)
+To test the model, navigate to the score-MRI directory and run the `inference_srmri.py` script. You can provide arguments to specify the directory of low-resolution images. The default directory is `samples`.
+The reconstruction will saved to results folder
 
 Example Usage: 
 ```
-cd score-MRI
-python inference_mri.py --root /path/to/low-resolution/images
+cd SRMRI
+python inference_srmri.py --root /path/to/low-resolution/images
 ```
 
-- Changing the skip steps (K from the paper): You can change skip steps in config files at score-MRI dir (sampling.fast_step=2 by default)
+- Changing the skip steps (K from the paper): You can change skip steps in config files (sampling.fast_step=2 by default)
 
 - Code adapted from [Score-based-diffusion-model](https://github.com/yang-song/score_sde_pytorch) and [MCG](https://github.com/HJ-harry/MCG_diffusion) 
 
