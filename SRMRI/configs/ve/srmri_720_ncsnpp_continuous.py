@@ -31,23 +31,17 @@ def get_config():
   sampling.method = 'pc'
   sampling.predictor = 'reverse_diffusion'
   sampling.corrector = 'langevin'
-  sampling.fast_step=1
+  sampling.fast_step=2
 
   # data
   data = config.data
-  data.dataset = 'fastmri_knee'
-  data.root = '/home/arpanp/Downloads/Data/SuperResolutionProject/Data_npz'
-  data.image_size1 = 512
+  data.dataset = 'srmri'
+  data.root = '/home/arpanp/Downloads/Data/SuperResolutionProject/Data_HR_train_npz'
+  data.image_size1 = 720
   data.image_size2 = 512
-  data.reshape=True
+  data.reshape=False
   data.is_multi = False
   data.is_complex = False
-  data.out_shape = [1,1,512,512]
-  
-  #measurement
-  measurement = config.measurement
-  measurement.operator = config.measurement.operator
-  measurement.operator.in_shape = [1,1,512,512]
 
   # model
   model = config.model

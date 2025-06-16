@@ -35,7 +35,7 @@ import losses
 import sampling
 from models import utils as mutils
 from models.ema import ExponentialMovingAverage
-import datasets
+import dataset
 import sde_lib
 from absl import flags
 from torchvision import transforms as T 
@@ -84,12 +84,12 @@ def train(config, workdir):
   # Build pytorch dataloader for training
   #transform=T.Compose([T.ToTensor()])
   transform=T.Compose([T.ToTensor(), T.Resize((config.data.image_size1,config.data.image_size2),antialias=True)])
-  train_dl= datasets.create_dataloader(config,transform=transform)
+  train_dl= dataset.create_dataloader(config,transform=transform)
   num_data = len(train_dl.dataset)
 
   # Create data normalizer and its inverse
-  scaler = datasets.get_data_scaler(config)
-  inverse_scaler = datasets.get_data_inverse_scaler(config)
+  scaler = dataset.get_data_scaler(config)
+  inverse_scaler = dataset.get_data_inverse_scaler(config)
 
   # Setup SDEs
   if config.training.sde.lower() == 'vpsde':
@@ -209,7 +209,7 @@ def train_regression(config, workdir):
   initial_step = int(state['step'])
 
   # Build pytorch dataloader for training
-  train_dl, eval_dl = datasets.create_dataloader(config)
+  train_dl, eval_dl = dataset.create_dataloader(config)
   num_data = len(train_dl.dataset)
 
   # Build one-step training and evaluation functions
@@ -281,13 +281,13 @@ def evaluate(config,
   tf.io.gfile.makedirs(eval_dir)
 
   # Build data pipeline
-  train_ds, eval_ds, _ = datasets.get_dataset(config,
+  train_ds, eval_ds, _ = dataset.get_dataset(config,
                                               uniform_dequantization=config.data.uniform_dequantization,
                                               evaluation=True)
 
   # Create data normalizer and its inverse
-  scaler = datasets.get_data_scaler(config)
-  inverse_scaler = datasets.get_data_inverse_scaler(config)
+  scaler = dataset.get_data_scaler(config)
+  inverse_scaler = dataset.get_data_inverse_scaler(config)
 
   # Initialize model
   score_model = mutils.create_model(config)
@@ -324,7 +324,7 @@ def evaluate(config,
 
 
   # Create data loaders for likelihood evaluation. Only evaluate on uniformly dequantized data
-  train_ds_bpd, eval_ds_bpd, _ = datasets.get_dataset(config,
+  train_ds_bpd, eval_ds_bpd, _ = dataset.get_dataset(config,
                                                       uniform_dequantization=True, evaluation=True)
   if config.eval.bpd_dataset.lower() == 'train':
     ds_bpd = train_ds_bpd

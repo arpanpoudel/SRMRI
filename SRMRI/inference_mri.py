@@ -11,8 +11,8 @@ import sampling
 from sde_lib import VESDE
 from sampling import (ReverseDiffusionPredictor,
                       LangevinCorrector)
-import datasets
-from datasets import ResizeAndPad
+import dataset
+from dataset import ResizeAndPad
 from skimage.transform import resize
 from torchvision import transforms
 from utils import normalize_np
@@ -76,8 +76,8 @@ def main():
 
     # Score Model
     sigmas = mutils.get_sigmas(config)
-    scaler = datasets.get_data_scaler(config)
-    inverse_scaler = datasets.get_data_inverse_scaler(config)
+    scaler = dataset.get_data_scaler(config)
+    inverse_scaler = dataset.get_data_inverse_scaler(config)
     score_model = mutils.create_model(config)
 
     ema = ExponentialMovingAverage(score_model.parameters(),
