@@ -68,27 +68,20 @@ for batch in loader:
 
 
 3. **Download Pretrained Weights**:
-    Download the pretrained model weights required for the super-resolution pipeline. There are two sets of weights:
-
-    a. **Kernel Learning Model Weights**
-    Download the weights for the **Kernel Learning Model** and place them in the `Kernel_learning/checkpoints` folder.
-    - **Download Link**: [Kernel Learning Weights](https://drive.google.com/file/d/1ee5xrPaTHvxR97QXKnwWAQdWQR7Yy3bO/view?usp=drive_link)
-    - **Folder Structure**: root/ ├── Kernel_learning/ │ ├── checkpoints/ │ │ ├── kernel_weight.pth
+    Download the pretrained model weights required for the super-resolution pipeline. 
     
-    b. **Score-Based MRI Model Weights**
-    Download the weights for the **Score-Based MRI Model** and place them in the `score-MRI/checkpoints` folder.
-    - **Download Link**: [Score-Based MRI Weights](https://drive.google.com/file/d/1Dn53VGDqWejEQD3adMcZA_BymrBhdxV9/view?usp=sharing)
-    - **Folder Structure**: root/ ├── score-MRI/ │ ├── checkpoints/ │ │ ├── score_weight.pth
+    a. ** Score function**
+    Download the weights for the **Score Model** trained on HR images.
+    - **Download Link**: [Score Weight](https://drive.google.com/file/d/1VCgbp_Dbvt4P2SAkzKKETQ9S1ZiEoPWm/view?usp=sharing)
+    - Update the path for weight in config file : root/ ├── SRMRI/ │ ├── configs│ ├── defaults_lsun_configs.py under ```config.ckpt_filename```
 
 4. **Environments**:
-    Use the environment.yml file in this repository to set up the environment:
-    ```
-    conda env create -f environment.yml
-    conda activate sup
-    ```
-    - CUDA Version: 12.2
-    - PyTorch version: 2.1.2
-    - TensorFlow Version: 2.15.0
+    Use the requirements.txt to create an conda environment.
+    Install pytorch_wavelets from [here](https://github.com/fbcotter/pytorch_wavelets.git)
+
+    - CUDA Version: 12.4
+    - PyTorch version: 2.5.1
+    - TensorFlow Version: 2.19.0
 
 ### Test the Model
 To test the model, navigate to the score-MRI directory and run the `inference_mri.py` script. You can provide arguments to specify the directory of low-resolution images. The default directory is `data/Registration_slices/test/LR`. (You should change the absolute path to your pc)

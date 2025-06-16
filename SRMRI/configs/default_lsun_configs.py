@@ -96,7 +96,7 @@ def get_default_configs():
 
   config.seed = 42
   config.device='cuda:0'
-  config.ckpt_filename="./workdir/score_weight.pth"
+  config.ckpt_filename="/home/cidar/Desktop/MRI_superres_registration/score-MRI/work_dir/checkpoints/checkpoint_990.pth"
   #config.device = torch.device('cuda:0') if torch.cuda.is_available() else torch.device('cpu')
 
   return config

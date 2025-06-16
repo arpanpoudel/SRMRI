@@ -103,27 +103,15 @@ def get_pc_mri(sde, predictor, corrector, inverse_scaler, snr,
             # x0 hat prediction
             _, bt = sde.marginal_prob(x, vec_t)
             hatx0 = x + (bt ** 2) * score
-            
             #apply dps
             x_next,distance=measurement_cond_fn(x_prev=x, x_t=x_next, x_0_hat=hatx0, measurement=measurement,noisy_measurement=noisy_measurement)
-            
             x_next = x_next.detach()
             return x_next,hatx0
           else:
-            #will update 
+            vec_t = torch.ones(x.shape[0], device=x.device) * t
             x = x.requires_grad_()
-            # #apply dps
-            # x_next,distance=measurement_cond_fn(x_prev=x, x_t=x, x_0_hat=hatx0, measurement=measurement)
-            # x_next = x_next.detach()
-            # print('from there')
-            #vec_t = torch.ones(x.shape[0], device=x.device) * t_next
-            #mean,std=sde.marginal_prob(hatx0,vec_t)
-            #x_next=hatx0+torch.randn_like(hatx0)*std[:,None,None,None]
-            
-            #experiment 3 added
-            #apply dps
-            #x_next,distance=measurement_cond_fn(x_prev=x, x_t=x, x_0_hat=hatx0, measurement=measurement)
-            x_next=fast_cond_fn(x,measurement)
+            x_next, x_next_mean, score = update_fn(x, vec_t, model=model)
+            x_next=fast_cond_fn(x_next,measurement)
             x_next = x_next.detach()
             
             return x_next,hatx0

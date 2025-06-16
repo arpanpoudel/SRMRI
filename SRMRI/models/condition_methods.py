@@ -78,7 +78,7 @@ class WaveletTransform:
         return resized_image  # Remove batch dimension
     
     def conditioning(self,xt,measurement):
-        #measurement= self.resize_image_torch(measurement, 720,512).float()  # Assuming y and xt are square and have a size of 720
+        measurement= self.resize_image_torch(measurement, 720,512).float()  # Assuming y and xt are square and have a size of 720
         Yl_xt, Yh_xt = self.dwt(xt)
         Yl_y, Yh_y = self.dwt(measurement)
         fused_Yl = Yl_y  

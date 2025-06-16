@@ -31,7 +31,7 @@ def main():
     parser.add_argument(
         "--root",
         type=str,
-        default="/home/arpanp/SRMRI/SRMRI/samples/lr",
+        default="./samples/",
         help="Path to the root directory containing input LR images. Default is set to /home/cidar/Desktop/MRI_superres_registration/data/Registration_slices/test/LR"
     )
     args = parser.parse_args()
