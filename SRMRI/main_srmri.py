@@ -15,7 +15,7 @@
 
 """Training and evaluation"""
 import torch
-import run_lib_fastmri
+import run_lib_srmri
 from absl import app
 from absl import flags
 from ml_collections.config_flags import config_flags
@@ -61,12 +61,12 @@ def main(argv):
     logger.setLevel('INFO')
     # Run the training pipeline
     if FLAGS.mode == "train":
-      run_lib_fastmri.train(FLAGS.config, FLAGS.workdir)
+      run_lib_srmri.train(FLAGS.config, FLAGS.workdir)
     elif FLAGS.mode == "train_regression":
-      run_lib_fastmri.train_regression(FLAGS.config, FLAGS.workdir)
+      run_lib_srmri.train_regression(FLAGS.config, FLAGS.workdir)
   elif FLAGS.mode == "eval":
     # Run the evaluation pipeline
-    run_lib_fastmri.evaluate(FLAGS.config, FLAGS.workdir, FLAGS.eval_folder)
+    run_lib_srmri.evaluate(FLAGS.config, FLAGS.workdir, FLAGS.eval_folder)
   else:
     raise ValueError(f"Mode {FLAGS.mode} not recognized.")
 

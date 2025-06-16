@@ -65,9 +65,12 @@ for batch in loader:
     break
 ```
 
+##### Drive Download
+Pre-processed dataset can also be downloaded from [here]()
 
 
-3. **Download Pretrained Weights**:
+
+#### **Download Pretrained Weights**:
     Download the pretrained model weights required for the super-resolution pipeline. 
     
     a. **Score function**
@@ -97,3 +100,13 @@ python inference_srmri.py --root /path/to/low-resolution/images
 
 - Code adapted from [Score-based-diffusion-model](https://github.com/yang-song/score_sde_pytorch) and [MCG](https://github.com/HJ-harry/MCG_diffusion) 
 
+If you use our code and dataset, cite:
+@inproceedings{poudel2025srmri,
+  title     = {SRMRI: A Diffusion-Based Super-Resolution Framework and Open Dataset for Blind MRI Super-Resolution},
+  author    = {Poudel, Arpan and Shrestha, Mamata and Wang, Nian and Nakarmi, Ukash},
+  booktitle = {Proceedings of Machine Learning Research},
+  series    = {MIDL},
+  pages     = {28:1--16},
+  year      = {2025},
+  url       = {https://github.com/arpanpoudel/SRMRI}
+}
