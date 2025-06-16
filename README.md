@@ -101,6 +101,7 @@ python inference_srmri.py --root /path/to/low-resolution/images
 - Code adapted from [Score-based-diffusion-model](https://github.com/yang-song/score_sde_pytorch) and [MCG](https://github.com/HJ-harry/MCG_diffusion) 
 
 If you use our code and dataset, cite:
+```bibtex
 @inproceedings{poudel2025srmri,
   title     = {SRMRI: A Diffusion-Based Super-Resolution Framework and Open Dataset for Blind MRI Super-Resolution},
   author    = {Poudel, Arpan and Shrestha, Mamata and Wang, Nian and Nakarmi, Ukash},
