@@ -31,7 +31,7 @@ def main():
     parser.add_argument(
         "--root",
         type=str,
-        default="/home/cidar/Desktop/MRI_superres_registration/data/Registration_slices/test/LR",
+        default="/home/arpanp/SRMRI/SRMRI/samples/lr",
         help="Path to the root directory containing input LR images. Default is set to /home/cidar/Desktop/MRI_superres_registration/data/Registration_slices/test/LR"
     )
     args = parser.parse_args()
@@ -42,10 +42,10 @@ def main():
 
     print('Initializing...')
     if sde.lower() == 'vesde':
-        configs = importlib.import_module(f"configs.ve.fastmri_knee_720_ncsnpp_continuous")
+        configs = importlib.import_module(f"configs.ve.srmri_720_ncsnpp_continuous")
         config = configs.get_config()
         config.model.num_scales = num_scales
-        ckpt_filename = '/home/cidar/Desktop/MRI_superres_registration/score-MRI/checkpoints/score_weight.pth'
+        ckpt_filename = config.ckpt_filename
         sde = VESDE(sigma_min=config.model.sigma_min, sigma_max=config.model.sigma_max, N=config.model.num_scales)
         sampling_eps = 1e-5
 
@@ -97,7 +97,7 @@ def main():
     files = [f.name for f in os.scandir(root)][::-1]
 
     for filename in files:
-        save_root = Path(f'./results_registration_srmri/{filename}')
+        save_root = Path(f'./results_srmri/{filename}')
         save_root.mkdir(parents=True, exist_ok=True)
 
         irl_types = ['input', 'recon', 'recon_progress']

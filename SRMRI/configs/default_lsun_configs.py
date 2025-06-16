@@ -65,11 +65,11 @@ def get_default_configs():
   #measurement 
   config.measurement = measurement = ml_collections.ConfigDict()
   measurement.operator = operator = ml_collections.ConfigDict()
-  measurement.operator.name='Kernel'
+  measurement.operator.name='resize_superresolution'
   
-  #measurement.operator.scale_factor=2
-  #measurement.operator.in_shape=[1,1,720,512]
-  measurement.operator.ckt_filename='/home/cidar/Desktop/MRI_superres_registration/Kernel_Learning/checkpoints/kernel_weight.pth'
+  measurement.operator.scale_factor=2
+  measurement.operator.in_shape=[1,1,720,512]
+  #measurement.operator.ckt_filename='/home/cidar/Desktop/MRI_superres_registration/Kernel_Learning/checkpoints/kernel_weight.pth'
   measurement.noise = noise = ml_collections.ConfigDict()
   measurement.noise.name='gaussian'
   measurement.noise.sigma=-0.05
@@ -96,6 +96,7 @@ def get_default_configs():
 
   config.seed = 42
   config.device='cuda:0'
+  config.ckpt_filename="./workdir/score_weight.pth"
   #config.device = torch.device('cuda:0') if torch.cuda.is_available() else torch.device('cpu')
 
   return config
