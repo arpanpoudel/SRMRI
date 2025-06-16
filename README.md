@@ -66,7 +66,7 @@ for batch in loader:
 ```
 
 ##### Drive Download
-Pre-processed dataset can also be downloaded from [here]()
+Pre-processed dataset can also be downloaded from [here](https://drive.google.com/file/d/1cbjedldunCcIAFzIWtRTHn28l0WxcxrM/view?usp=sharing)
 
 
 
@@ -85,6 +85,7 @@ Pre-processed dataset can also be downloaded from [here]()
     - CUDA Version: 12.4
     - PyTorch version: 2.5.1
     - TensorFlow Version: 2.19.0
+    - Device : 8 x GeForce RTX 3090 Graphics Card
 
 ### Test the Model
 To test the model, navigate to the SRMRI directory and run the `inference_srmri.py` script. You can provide arguments to specify the directory of low-resolution images. The default directory is `samples`.
