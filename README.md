@@ -1,4 +1,5 @@
-## SRMRI: An Open Dataset and Benchmarks for Blind Super-Resolution of 2D MRI [Paper] (https://openreview.net/forum?id=25wvW3T7AR) [Poster] (https://drive.google.com/file/d/1OAbAhUHS7panUvCIYNWtVh97D0LmhQRX/view?usp=sharing)
+## SRMRI: An Open Dataset and Benchmarks for Blind Super-Resolution of 2D MRI 
+[Paper](https://openreview.net/forum?id=25wvW3T7AR) [Poster](https://drive.google.com/file/d/1OAbAhUHS7panUvCIYNWtVh97D0LmhQRX/view?usp=sharing)
 
 ### Overview
 **SRMRI** is a curated dataset designed for the training and evaluation of machine learning models for blind super-resolution of 2D MRI images. The dataset includes both low-resolution (LR) and high-resolution (HR) images, obtained directly from MRI scanners, and provides a benchmark for the development and comparison of super-resolution algorithms.
