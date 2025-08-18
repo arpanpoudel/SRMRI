@@ -71,21 +71,21 @@ Pre-processed dataset can also be downloaded from [here](https://drive.google.co
 
 
 #### **Download Pretrained Weights**:
-    Download the pretrained model weights required for the super-resolution pipeline. 
+Download the pretrained model weights required for the super-resolution pipeline. 
     
-    a. **Score function**
+a. **Score function**
     Download the weights for the **Score Model** trained on HR images.
     - **Download Link**: [Score Weight](https://drive.google.com/file/d/1VCgbp_Dbvt4P2SAkzKKETQ9S1ZiEoPWm/view?usp=sharing)
     - Update the path for weight in config file : root/ ├── SRMRI/ │ ├── configs│ ├── defaults_lsun_configs.py under ```config.ckpt_filename```
 
-4. **Environments**:
-    Use the requirements.txt to create an conda environment.
-    Install pytorch_wavelets from [here](https://github.com/fbcotter/pytorch_wavelets.git)
+##### **Environments**:
+Use the requirements.txt to create an conda environment.
+Install pytorch_wavelets from [here](https://github.com/fbcotter/pytorch_wavelets.git)
 
-    - CUDA Version: 12.4
-    - PyTorch version: 2.5.1
-    - TensorFlow Version: 2.19.0
-    - Device : 8 x GeForce RTX 3090 Graphics Card
+- CUDA Version: 12.4
+- PyTorch version: 2.5.1
+- TensorFlow Version: 2.19.0
+- Device : 8 x GeForce RTX 3090 Graphics Card
 
 ### Test the Model
 To test the model, navigate to the SRMRI directory and run the `inference_srmri.py` script. You can provide arguments to specify the directory of low-resolution images. The default directory is `samples`.
